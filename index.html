@@ -270,6 +270,18 @@
       line-height: 1.55;
     }
 
+    .char-role {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Verborgene Absichten */
+    #verborgene { background: linear-gradient(to bottom, #140f0a, #0c0807); }
+
     /* Antagonisten-Sektion */
     #antagonisten { background: #0c0807; }
 
@@ -793,10 +805,34 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/tsu.jpg" alt="Tsu" loading="lazy" onclick="openLightbox(this.src)" />
+          <img src="assets/img/vynn.jpg" alt="Vynn" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
-            <div class="char-name">Tsu</div>
-            <div class="char-quote">Redet wenig. Beobachtet alles. Weiss mehr als sie zeigt.</div>
+            <div class="char-name">Vynn</div>
+            <div class="char-quote">Er spricht selten, doch wenn er es tut, hört jeder zu.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/nimara.png" alt="Nimara" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="char-info">
+            <div class="char-name">Prinzessin Nimara</div>
+            <div class="char-quote">Liest schneller als andere denken. Ihr Rollstuhl hält sie nicht auf. Ihr Wissen schon eher.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/cian.jpg" alt="Cian Al Taki" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="char-info">
+            <div class="char-name">Cian Al Taki</div>
+            <div class="char-quote">Aus den Südlanden von Asharu bis nach Tharvos. Der Koch der Gilde hat immer eine Geschichte parat.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/grooba.png" alt="Grooba" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="char-info">
+            <div class="char-name">Grooba</div>
+            <div class="char-quote">Kocht für alle, die sonst nichts haben. Fragt nie, woher du kommst. Nur, ob du Hunger hast.</div>
           </div>
         </div>
 
@@ -816,19 +852,32 @@
           </div>
         </div>
 
+      </div><!-- /char-grid -->
+    </div>
+  </section>
+
+  <!-- VERBORGENE ABSICHTEN -->
+  <section id="verborgene">
+    <div class="section-inner">
+      <span class="section-label">Zwischen den Fronten</span>
+      <h2 class="section-title">Verborgene Absichten</h2>
+
+      <div class="char-grid">
+
         <div class="char-card">
-          <img src="assets/img/nimara.png" alt="Nimara" loading="lazy" onclick="openLightbox(this.src)" />
+          <img src="assets/img/panjim.jpg" alt="Panjim Faro" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
-            <div class="char-name">Prinzessin Nimara</div>
-            <div class="char-quote">Liest schneller als andere denken. Ihr Rollstuhl hält sie nicht auf. Ihr Wissen schon eher.</div>
+            <div class="char-name">Panjim Faro</div>
+            <div class="char-role">Schmugglerkapitän</div>
+            <div class="char-quote">Auf den Meeren von Velmaris kennt ihn jeder. Was er wirklich transportiert, weiss niemand.</div>
           </div>
         </div>
 
         <div class="char-card">
-          <img src="assets/img/grooba.png" alt="Grooba" loading="lazy" onclick="openLightbox(this.src)" />
+          <img src="assets/img/tsu.jpg" alt="Tsu" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
-            <div class="char-name">Grooba</div>
-            <div class="char-quote">Kocht für alle, die sonst nichts haben. Fragt nie, woher du kommst. Nur, ob du Hunger hast.</div>
+            <div class="char-name">Tsu</div>
+            <div class="char-quote">Redet wenig. Beobachtet alles. Weiss mehr als sie zeigt.</div>
           </div>
         </div>
 
@@ -840,7 +889,16 @@
           </div>
         </div>
 
-      </div><!-- /char-grid -->
+        <div class="char-card">
+          <img src="assets/img/maren.jpg" alt="Maren" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="char-info">
+            <div class="char-name">Maren</div>
+            <div class="char-role">Novizin der Barmherzigen Schwestern</div>
+            <div class="char-quote">Sie heilt, wen der Orden vergessen hat. Und stellt dabei Fragen, die man besser nicht laut stellt.</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
