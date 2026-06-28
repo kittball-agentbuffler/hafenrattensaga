@@ -1,328 +1,1022 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Die Hafenratten von Tharvos</title>
-  <meta name="description" content="Tharvos. Die Großmutter aller Städte. Wo Gerechtigkeit nichts und Freundschaft alles bedeutet. Die Hafenrattensaga, Dark Fantasy ab 12 Jahren. Band 1 erscheint Winter 2026.">
+  <meta name="description" content="Im Hafenviertel von Tharvos regiert die Diebesgilde, genannt die Hafenratten. Dark Fantasy ab 12 Jahren. Band 1 erscheint Winter 2026." />
+  <meta property="og:title" content="Die Hafenratten von Tharvos" />
+  <meta property="og:description" content="Im Hafenviertel von Tharvos regiert die Diebesgilde, genannt die Hafenratten." />
+  <meta property="og:image" content="https://hafenratten.de/assets/img/og-banner.jpg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hafenratten.de" />
 
-  <meta property="og:title" content="Die Hafenratten von Tharvos">
-  <meta property="og:description" content="Tharvos. Die Großmutter aller Städte. Wo Gerechtigkeit nichts und Freundschaft alles bedeutet.">
-  <meta property="og:image" content="https://hafenrattensaga.de/assets/img/og-banner.jpg">
-  <meta property="og:url" content="https://hafenrattensaga.de">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_DE">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="preload" href="assets/img/logo-banner.png" as="image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Almendra:ital@0;1&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0d0a08;
+      --parchment:  #f0e8d8;
+      --parchment2: #e6d9c2;
+      --gold:       #c8a44a;
+      --gold-dark:  #8a6a1f;
+      --rust:       #7a2e1a;
+      --shadow:     rgba(13, 10, 8, 0.85);
+      --muted:      #5a4a38;
+      --divider:    rgba(200, 164, 74, 0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--parchment);
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--parchment); }
+
+    /* === TYPOGRAPHY === */
+    h1, h2, h3, .nav-logo {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.06em;
+    }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(to bottom, rgba(13,10,8,0.95), transparent);
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--parchment2);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* === HERO === */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/img/hafen-docks.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.35);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-logo {
+      max-width: 380px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-text {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      line-height: 1.85;
+      color: var(--parchment);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-text strong {
+      display: block;
+      font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero-scroll {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      animation: bob 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* === GOLD DIVIDER === */
+    .divider {
+      width: 100%;
+      max-width: 320px;
+      height: 1px;
+      background: var(--divider);
+      margin: 0 auto;
+    }
+
+    .divider-ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      margin: 0.5rem 0;
+      opacity: 0.5;
+    }
+
+    /* === SECTIONS === */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--gold);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    /* === FIGUREN / CHARAKTERE === */
+    #figuren { background: linear-gradient(to bottom, var(--ink), #140f0a); }
+
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .char-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+      background: rgba(255,255,255,0.03);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .char-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .char-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      filter: saturate(0.85) brightness(0.9);
+      transition: filter 0.3s;
+    }
+
+    .char-card:hover img {
+      filter: saturate(1) brightness(1);
+    }
+
+    .char-info {
+      padding: 1rem 1.1rem 1.25rem;
+      background: linear-gradient(to bottom, rgba(13,10,8,0) 0%, rgba(13,10,8,0.95) 100%);
+    }
+
+    .char-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+
+    .char-quote {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--parchment2);
+      line-height: 1.5;
+    }
+
+    /* Antagonisten-Sektion */
+    #antagonisten { background: #0a0706; }
+
+    .antag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .antag-card {
+      border: 1px solid rgba(122, 46, 26, 0.35);
+      background: rgba(122, 46, 26, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      min-height: 260px;
+      gap: 1rem;
+      transition: border-color 0.25s;
+    }
+
+    .antag-card:hover {
+      border-color: rgba(122, 46, 26, 0.7);
+    }
+
+    .antag-sigil {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(122, 46, 26, 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: rgba(122, 46, 26, 0.6);
+    }
+
+    .antag-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: rgba(200, 164, 74, 0.5);
+      text-align: center;
+      letter-spacing: 0.08em;
+    }
+
+    .antag-tag {
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: rgba(240, 232, 216, 0.3);
+      text-align: center;
+    }
+
+    .antag-hint {
+      text-align: center;
+      margin-top: 3rem;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(200, 164, 74, 0.4);
+      letter-spacing: 0.05em;
+    }
+
+    /* === WELT === */
+    #welt { background: linear-gradient(to bottom, #140f0a, #0d0a08); }
+
+    .welt-intro {
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+      font-family: 'IM Fell English', serif;
+      font-size: 1.15rem;
+      color: var(--parchment2);
+      line-height: 1.8;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .location-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+
+    .location-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(0.8);
+      transition: filter 0.3s, transform 0.4s;
+    }
+
+    .location-card:hover img {
+      filter: brightness(0.85) saturate(1);
+      transform: scale(1.03);
+    }
+
+    .location-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.25rem 1rem 0.9rem;
+      background: linear-gradient(to top, rgba(13,10,8,0.95), transparent);
+    }
+
+    .location-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .location-desc {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--parchment2);
+      line-height: 1.45;
+    }
+
+    /* Karten */
+    .karten-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .karte-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .karte-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .karte-wrap {
+      position: relative;
+      border: 1px solid var(--divider);
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .karte-wrap img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .karte-wrap:hover img { transform: scale(1.04); }
+
+    .karte-label {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      background: rgba(13,10,8,0.8);
+      padding: 0.3rem 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    /* === BUCH === */
+    #buch { background: #0d0a08; }
+
+    .buch-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .buch-cover {
+      position: relative;
+    }
+
+    .buch-cover img {
+      width: 100%;
+      box-shadow: 8px 12px 40px rgba(0,0,0,0.7);
+      border: 1px solid var(--divider);
+    }
+
+    .cover-placeholder {
+      aspect-ratio: 2 / 3;
+      background: linear-gradient(135deg, #1a1208, #0d0a08);
+      border: 1px solid var(--divider);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .cover-placeholder .cover-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      line-height: 1.4;
+    }
+
+    .cover-placeholder .cover-sub {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--parchment2);
+    }
+
+    .buch-text h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .buch-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .buch-klappentext {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--parchment2);
+      margin-bottom: 2rem;
+    }
+
+    .release-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--divider);
+      padding: 0.5rem 1.2rem;
+    }
+
+    /* === NEWSLETTER === */
+    #newsletter {
+      background: linear-gradient(to bottom, #0d0a08, #140f0a);
+      text-align: center;
+    }
+
+    .spaher-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1rem;
+    }
+
+    .spaher-title {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      color: var(--parchment);
+      line-height: 1.6;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .spaher-form {
+      display: flex;
+      gap: 0;
+      max-width: 460px;
+      margin: 0 auto 1rem;
+    }
+
+    .spaher-form input[type="email"] {
+      flex: 1;
+      background: rgba(240,232,216,0.07);
+      border: 1px solid var(--divider);
+      border-right: none;
+      color: var(--parchment);
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      padding: 0.8rem 1.1rem;
+      outline: none;
+      transition: background 0.2s;
+    }
+
+    .spaher-form input[type="email"]::placeholder { color: var(--muted); }
+    .spaher-form input[type="email"]:focus { background: rgba(240,232,216,0.11); }
+
+    .spaher-form button {
+      background: var(--gold-dark);
+      border: 1px solid var(--gold);
+      color: var(--parchment);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.4rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .spaher-form button:hover { background: var(--gold); color: var(--ink); }
+
+    .spaher-success {
+      display: none;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1.05rem;
+    }
+
+    .spaher-legal {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    .spaher-legal a { color: var(--muted); text-decoration: underline; }
+
+    /* === FOOTER === */
+    footer {
+      background: #080605;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--divider);
+    }
+
+    .footer-logo img {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+      margin: 0 auto 1.25rem;
+      opacity: 0.7;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .footer-social a:hover { color: var(--gold); }
+
+    .footer-legal {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-legal a { color: var(--muted); }
+    .footer-legal a:hover { color: var(--parchment2); }
+
+    /* === LIGHTBOX CLOSE === */
+    .lb-close {
+      position: fixed;
+      top: 1.5rem; right: 1.75rem;
+      font-size: 1.8rem;
+      color: var(--parchment2);
+      cursor: pointer;
+      z-index: 201;
+      line-height: 1;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      nav { padding: 0.75rem 1.25rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.65rem; }
+
+      .buch-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .buch-cover { max-width: 280px; margin: 0 auto; }
+
+      .karten-row { grid-template-columns: 1fr; }
+
+      .spaher-form { flex-direction: column; }
+      .spaher-form input[type="email"] { border-right: 1px solid var(--divider); border-bottom: none; }
+      .spaher-form button { border-left: 1px solid var(--gold); }
+    }
+
+    @media (max-width: 480px) {
+      .char-grid { grid-template-columns: 1fr 1fr; }
+      .antag-grid { grid-template-columns: 1fr 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll { animation: none; }
+      .char-card, .location-card img, .karte-wrap img { transition: none; }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAVIGATION -->
-<nav class="nav" aria-label="Hauptnavigation">
-  <div class="nav-logo">
-    <a href="#hero"><img src="assets/img/logo-banner.png" alt="Hafenratten Saga"></a>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#welt">Welt</a></li>
-    <li><a href="#buch">Buch</a></li>
-    <li><a href="#figuren">Figuren</a></li>
-    <li><a href="#newsletter">Späher</a></li>
-  </ul>
-  <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<nav class="nav-overlay" aria-label="Mobiles Menü">
-  <a href="#welt">Welt</a>
-  <a href="#buch">Buch</a>
-  <a href="#figuren">Figuren</a>
-  <a href="#newsletter">Späher</a>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <img src="assets/img/logo-banner.png" alt="Hafenratten Saga" class="hero-logo">
-    <p class="hero-tagline">
-      Tharvos. Die Großmutter aller Städte.<br>
-      Wo Gerechtigkeit nichts und Freundschaft alles bedeutet.
-    </p>
-  </div>
-  <div class="scroll-indicator" aria-hidden="true">&#8964;</div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- WELT VON THARVOS -->
-<section id="welt">
-  <div class="sec-header fade-in">
-    <div class="ornament" aria-hidden="true">
-      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line right"></div>
-    </div>
-    <h2>Oh Tharvos, du unglaublichste aller Städte</h2>
-    <p class="sec-sub">Dreihunderttausend Seelen, gestapelt in den Fels. Salzdampf und Kesselrauch. Eine Stadt, die niemals schläft, niemals vergisst, und niemals vergibt.</p>
-  </div>
-
-  <div class="cards-grid cards-4">
-    <article class="card fade-in">
-      <div class="card-img-wrap">
-        <img src="assets/img/hafen-docks.jpg" alt="Die Hafendocks von Tharvos" loading="lazy">
-      </div>
-      <div class="card-body">
-        <p class="card-title">Der Hafen</p>
-        <p class="card-text">„Salz, Teer und unausgesprochene Abkommen. Hier legen Schiffe an, die offiziell nichts Verbotenes geladen haben. Kapitäne, die nie direkt antworten."</p>
-      </div>
-    </article>
-    <article class="card fade-in">
-      <div class="card-img-wrap">
-        <img src="assets/img/gassen-laternen.jpg" alt="Die Gassen der Unterstadt" loading="lazy">
-      </div>
-      <div class="card-body">
-        <p class="card-title">Die Gassen</p>
-        <p class="card-text">„Die Unterstadt gehört den Schnellen und den Stummen. Hier lernt man früh: Wer rennt, hat einen Grund. Wer fragt, auch."</p>
-      </div>
-    </article>
-    <article class="card fade-in">
-      <div class="card-img-wrap">
-        <img src="assets/img/palast.jpg" alt="Der goldene Palast von Tharvos" loading="lazy">
-      </div>
-      <div class="card-body">
-        <p class="card-title">Der Palast</p>
-        <p class="card-text">„Goldene Kuppeln über der Klippe, von überall sichtbar. Von unten sieht man den Glanz. Was man nicht sieht, zahlt man trotzdem."</p>
-      </div>
-    </article>
-    <article class="card fade-in">
-      <div class="card-img-wrap">
-        <img src="assets/img/rostklippen.jpg" alt="Die Rostklippen" loading="lazy">
-      </div>
-      <div class="card-body">
-        <p class="card-title">Die Rostklippen</p>
-        <p class="card-text">„Eisengeruch, Rauch und das Geschrei der Händler. Hier lebt, wer sonst keinen Platz hat. Und hier sucht die Gilde, wen sie braucht."</p>
-      </div>
-    </article>
-  </div>
-
-  <!-- Karten am Ende der Welt-Sektion -->
-  <div class="maps-section fade-in">
-    <div class="maps-header">
-      <div class="ornament" aria-hidden="true">
-        <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line right"></div>
-      </div>
-      <p class="maps-title">Karten von Tharvos</p>
-    </div>
-    <div class="maps-row">
-      <div class="map-card" data-lightbox="assets/img/stadtkarte.jpg" data-lightbox-alt="Stadtkarte von Tharvos">
-        <img src="assets/img/stadtkarte.jpg" alt="Stadtkarte von Tharvos" loading="lazy">
-        <p class="map-label">&#9670; Tharvos &#9670;</p>
-      </div>
-      <div class="map-card" data-lightbox="assets/img/weltkarte.jpg" data-lightbox-alt="Weltkarte von Velar">
-        <img src="assets/img/weltkarte.jpg" alt="Weltkarte von Velar" loading="lazy">
-        <p class="map-label">&#9670; Velar &#9670;</p>
-      </div>
-    </div>
-    <p class="maps-hint">&#8599; Klicke zum Vergrößern</p>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- BUCH -->
-<section id="buch">
-  <div class="sec-header fade-in">
-    <div class="ornament" aria-hidden="true">
-      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line right"></div>
-    </div>
-    <h2>Band 1</h2>
-  </div>
-
-  <div class="buch-inner fade-in">
-    <div class="book-cover">
-      <img src="assets/img/buchcover.jpg" alt="Die Hafenratten von Tharvos, Band 1">
-    </div>
-    <div class="buch-text">
-      <p class="buch-subtitle">Hafenrattensaga</p>
-      <h3 class="buch-title-main">Die Hafenratten<br>von Tharvos</h3>
-      <div class="buch-klappe">
-        <p>Tavi ist zwölf, als er die Stimme hört. Sie ist alt. Mächtig. Und sie sitzt fest in seinem Kopf.</p>
-        <p>In Tharvos, der Stadt die niemals schläft, kämpft er sich durch die Prüfungen der Diebesgilde, während die Inquisition begabte Kinder verfolgt und im Untergrund ein Artefakt wartet, das gefunden werden will.</p>
-      </div>
-      <span class="btn">Erscheint Winter 2026</span>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- FIGUREN -->
-<section id="figuren">
-  <div class="sec-header fade-in">
-    <div class="ornament" aria-hidden="true">
-      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line right"></div>
-    </div>
-    <h2>Aus dem Gilden-Archiv</h2>
-  </div>
-
-  <div class="figuren-grid">
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/tavi.jpg" alt="Tavi" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Tavi</p>
-        <p class="fig-quote">„Versteht einen Herzschlag zu spät. Aber wenn er handelt, hat er schon entschieden."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/yara.jpg" alt="Yara" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Yara</p>
-        <p class="fig-quote">„Fragt nicht, ob sie Angst hat. Sie handelt trotzdem."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/grymm.jpg" alt="Grymm" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Grymm</p>
-        <p class="fig-quote">„Drei Versuche. Wer beim zweiten noch zweifelt, schafft den dritten nicht."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/kip-gobbo.jpg" alt="Kip, der Gobbo" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Kip</p>
-        <p class="fig-quote">„Von den Rostklippen. Redet zu viel. Hört zu gut."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/nimara.png" alt="Nimara" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Nimara</p>
-        <p class="fig-quote">„Liest schneller als andere denken. Ihr Rollstuhl hält sie nicht auf. Ihr Wissen schon eher."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/sorath.png" alt="Sorath" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Sorath</p>
-        <p class="fig-quote">„Goldene Rüstung, kalter Blick. Wer ihn reiten sieht, weiß: Die Inquisition ist nah."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/brom.png" alt="Brom" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Brom</p>
-        <p class="fig-quote">„Kennt jedes Siegel, jede Schrift, jeden Fluch. Aber seinen wahren Namen kennt niemand."</p>
-      </div>
-    </article>
-    <article class="fig-card fade-in">
-      <div class="fig-img-wrap">
-        <img src="assets/img/grooba.png" alt="Grooba" loading="lazy">
-      </div>
-      <div class="fig-body">
-        <p class="fig-name">Grooba</p>
-        <p class="fig-quote">„Kocht für alle, die sonst nichts haben. Fragt nie, woher du kommst. Nur, ob du Hunger hast."</p>
-      </div>
-    </article>
-  </div>
-
-  <!-- Action shots -->
-  <div class="char-action fade-in">
-    <div class="char-action-img">
-      <img src="assets/img/strand.jpg" alt="Tavi und Yara am Wrack der Rostklippen" loading="lazy">
-    </div>
-    <div class="char-action-img">
-      <img src="assets/img/gassen.jpg" alt="Tavi und Yara auf der Flucht durch die Gassen" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="sec-header fade-in">
-    <div class="ornament" aria-hidden="true">
-      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line right"></div>
-    </div>
-    <h2>Der Späher meldet sich</h2>
-  </div>
-
-  <div class="newsletter-body fade-in">
-    <p class="newsletter-quote">
-      „In Tharvos überleben die, die früh genug wissen was kommt.<br>
-      Trag dich ein, und erfahre als Erster,<br>
-      wann Band 1 erscheint."
-    </p>
-    <!-- Backend-Integration nötig: action + method setzen, z.B. Cloudflare Worker oder Mailchimp -->
-    <form class="nl-form" method="POST" action="#">
-      <label for="nl-email" class="sr-only">E-Mail-Adresse</label>
-      <input id="nl-email" class="nl-input" type="email" name="email" placeholder="deine@email.de" required autocomplete="email">
-      <div aria-hidden="true" style="position:absolute;left:-9999px"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
-      <button type="submit" class="btn btn-solid">Späher werden</button>
-    </form>
-    <div class="nl-success" role="status">
-      &#10022; Du bist auf der Späher-Liste. Tharvos wartet auf dich.
-    </div>
-    <p class="nl-disclaimer">
-      Kein Spam. Nur Nachrichten aus Tharvos.<br>
-      <small>Mit der Anmeldung stimmst du zu, gelegentlich Neuigkeiten zur Hafenrattensaga zu erhalten.
-      <a href="datenschutz.html">Datenschutzerklärung</a>.</small>
-    </p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <a href="#hero"><img src="assets/img/logo-banner.png" alt="Hafenratten Saga"></a>
-  </div>
-  <div class="footer-social">
-    <a href="https://instagram.com/hafenrattensaga" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">
+      <img src="assets/img/logo-siegel.png" alt="Hafenratten Saga" />
     </a>
-    <a href="https://tiktok.com/@hafenrattensaga" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.76a4.85 4.85 0 01-1.02-.07z"/></svg>
-    </a>
-    <a href="https://youtube.com/@hafenrattensaga" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    </a>
-  </div>
-  <p class="footer-links">
-    <span>&copy; 2026 Hafenrattensaga</span>
-    <span class="dot">&middot;</span>
-    <a href="impressum.html">Impressum</a>
-    <span class="dot">&middot;</span>
-    <a href="datenschutz.html">Datenschutz</a>
-  </p>
-</footer>
+    <ul class="nav-links">
+      <li><a href="#figuren">Figuren</a></li>
+      <li><a href="#welt">Welt</a></li>
+      <li><a href="#buch">Buch</a></li>
+      <li><a href="#newsletter">Späher</a></li>
+    </ul>
+  </nav>
 
-<!-- LIGHTBOX -->
-<div class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Bildvorschau">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" aria-label="Schließen">&times;</button>
-    <img src="" alt="">
-  </div>
-</div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="assets/img/logo-banner.png" alt="Die Hafenratten von Tharvos" />
+      <div class="hero-text">
+        <strong>Im Hafenviertel von Tharvos regiert die Diebesgilde, genannt die Hafenratten.</strong>
+        Wer kein Geld hat, schläft unter freiem Himmel.
+        Wer keinen Schutz hat, verschwindet.
+        Und wer Magie in sich trägt, hofft, dass ihn niemand findet.<br><br>
+        Tavi hat all das. Und er ahnt nicht einmal, was das bedeutet.
+      </div>
+      <a class="hero-scroll" href="#figuren">&#8964; Weiter</a>
+    </div>
+  </section>
 
-<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}</style>
-<script src="js/main.js" defer></script>
+  <!-- FIGUREN: HELDEN -->
+  <section id="figuren">
+    <div class="section-inner">
+      <span class="section-label">Gilden-Archiv</span>
+      <h2 class="section-title">Unsere Helden</h2>
+
+      <div class="char-grid">
+
+        <div class="char-card">
+          <img src="assets/img/tavi.jpg" alt="Tavi" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Tavi</div>
+            <div class="char-quote">Versteht einen Herzschlag zu spät. Aber wenn er handelt, hat er schon entschieden.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/yara.jpg" alt="Yara" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Yara</div>
+            <div class="char-quote">Fragt nicht, ob sie Angst hat. Sie handelt trotzdem.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/tsu.jpg" alt="Tsu" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Tsu</div>
+            <div class="char-quote">Redet wenig. Beobachtet alles. Weiss mehr als sie zeigt.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/grymm.jpg" alt="Grymm" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Grymm</div>
+            <div class="char-quote">Drei Versuche. Wer beim zweiten noch zweifelt, schafft den dritten nicht.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/kip-gobbo.jpg" alt="Kip" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Kip</div>
+            <div class="char-quote">Von den Rostklippen. Redet zu viel. Hört zu gut.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/nimara.png" alt="Nimara" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Nimara</div>
+            <div class="char-quote">Liest schneller als andere denken. Ihr Rollstuhl hält sie nicht auf. Ihr Wissen schon eher.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/grooba.png" alt="Grooba" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Grooba</div>
+            <div class="char-quote">Kocht für alle, die sonst nichts haben. Fragt nie, woher du kommst. Nur, ob du Hunger hast.</div>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <img src="assets/img/brom.png" alt="Brom" loading="lazy" />
+          <div class="char-info">
+            <div class="char-name">Brom</div>
+            <div class="char-quote">Er ist der König der Diebe und der Chef der Hafenratten. Doch er hat sich auf ein gefährliches Spiel eingelassen, das er zu verlieren droht.</div>
+          </div>
+        </div>
+
+      </div><!-- /char-grid -->
+    </div>
+  </section>
+
+  <!-- ANTAGONISTEN -->
+  <section id="antagonisten">
+    <div class="section-inner">
+      <span class="section-label">Wen du meiden solltest</span>
+      <h2 class="section-title" style="color: rgba(200,164,74,0.5);">Gegner und Fies&#x200B;linge</h2>
+
+      <div class="antag-grid">
+
+        <div class="antag-card">
+          <div class="antag-sigil">&#9670;</div>
+          <div class="antag-name">Sorath Arrys</div>
+          <div class="antag-tag">Heerführer der Inquisition</div>
+        </div>
+
+        <div class="antag-card">
+          <div class="antag-sigil">&#9670;</div>
+          <div class="antag-name">Gräfin van Zabor</div>
+          <div class="antag-tag">Herrin des Hafenviertels</div>
+        </div>
+
+        <div class="antag-card">
+          <div class="antag-sigil">&#9670;</div>
+          <div class="antag-name">Lysara Varanth</div>
+          <div class="antag-tag">Unbekannt</div>
+        </div>
+
+        <div class="antag-card">
+          <div class="antag-sigil">&#9670;</div>
+          <div class="antag-name">Kale</div>
+          <div class="antag-tag">Unbekannt</div>
+        </div>
+
+      </div>
+
+      <p class="antag-hint">Mehr wird bekannt, wenn die Zeit gekommen ist.</p>
+
+    </div>
+  </section>
+
+  <!-- WELT -->
+  <section id="welt">
+    <div class="section-inner">
+      <span class="section-label">Die Welt</span>
+      <h2 class="section-title">Tharvos</h2>
+
+      <p class="welt-intro">
+        Die größte Stadt auf dem Kontinent Velmaris. Voller Ungleichheit, Chaos, Dreck und Glanz.
+        Eine Stadt, die niemals schläft, niemals vergisst und niemals vergibt.
+      </p>
+
+      <div class="location-grid">
+
+        <div class="location-card">
+          <img src="assets/img/hafen-docks.jpg" alt="Die Hafendocks von Tharvos" loading="lazy" />
+          <div class="location-label">
+            <span class="location-name">Der Hafen</span>
+            <span class="location-desc">Salz, Teer und unausgesprochene Abkommen. Hier legen Schiffe an, die offiziell nichts Verbotenes geladen haben.</span>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <img src="assets/img/gassen-laternen.jpg" alt="Die Gassen der Unterstadt" loading="lazy" />
+          <div class="location-label">
+            <span class="location-name">Die Gassen</span>
+            <span class="location-desc">Die Unterstadt gehört den Schnellen und den Stummen. Hier lernt man früh: Wer rennt, hat einen Grund.</span>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <img src="assets/img/palast.jpg" alt="Der goldene Palast von Tharvos" loading="lazy" />
+          <div class="location-label">
+            <span class="location-name">Der Palast</span>
+            <span class="location-desc">Goldene Kuppeln über der Klippe. Von unten sieht man den Glanz. Was man nicht sieht, zahlt man trotzdem.</span>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <img src="assets/img/rostklippen.jpg" alt="Die Rostklippen" loading="lazy" />
+          <div class="location-label">
+            <span class="location-name">Die Rostklippen</span>
+            <span class="location-desc">Eisengeruch, Rauch und das Geschrei der Händler. Hier lebt, wer sonst keinen Platz hat.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider-ornament">&#9670; &#9670; &#9670;</div>
+
+      <div class="karten-row">
+        <div class="karte-group">
+          <div class="karte-heading">Tharvos, die Großmutter aller Städte</div>
+          <div class="karte-wrap" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="assets/img/stadtkarte.jpg" alt="Stadtkarte von Tharvos" loading="lazy" />
+            <span class="karte-label">&#9670; Tharvos &#9670;</span>
+          </div>
+        </div>
+        <div class="karte-group">
+          <div class="karte-heading">Velar, die bekannte Weltenscheibe</div>
+          <div class="karte-wrap" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="assets/img/weltkarte.jpg" alt="Weltkarte von Velar" loading="lazy" />
+            <span class="karte-label">&#9670; Velar &#9670;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BUCH -->
+  <section id="buch">
+    <div class="section-inner">
+      <span class="section-label">Hafenrattensaga</span>
+
+      <div class="buch-inner">
+
+        <div class="buch-cover">
+          <div class="cover-placeholder">
+            <div class="cover-title">Die Hafenratten<br>von Tharvos</div>
+            <div class="cover-sub">Cover erscheint bald</div>
+          </div>
+        </div>
+
+        <div class="buch-text">
+          <h2>Die Hafenratten von Tharvos</h2>
+          <div class="buch-subtitle">Band 1 der Hafenrattensaga</div>
+
+          <p class="buch-klappentext">
+            Tavi ist zwölf. Er hat keinen Plan, keine Lobby und keine Ahnung,
+            warum die Inquisition plötzlich Leute wie ihn sucht.<br><br>
+            In Tharvos, der Stadt die niemals schläft, kämpft er sich durch
+            die Prüfungen der Diebesgilde. Unter der Stadt wartet ein Artefakt,
+            das gefunden werden will. Und nicht alle, die ihm helfen,
+            tun es uneigennützig.
+          </p>
+
+          <span class="release-badge">Erscheint Winter 2026</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="section-inner">
+      <div class="spaher-eyebrow">Der Späher meldet sich</div>
+      <p class="spaher-title">
+        Trage dich ein und erfahre wichtige Geheimnisse über Tharvos
+        und wie es mit der Hafenratten Saga weitergeht.
+      </p>
+
+      <form class="spaher-form" onsubmit="handleSignup(event)">
+        <input type="email" placeholder="E-Mail-Adresse" required aria-label="E-Mail-Adresse" />
+        <button type="submit">Späher werden</button>
+      </form>
+
+      <div class="spaher-success" id="signup-success">
+        &#10022; Du bist auf der Späher-Liste. Tharvos wartet auf dich.
+      </div>
+
+      <p class="spaher-legal">
+        Kein Spam. Nur Nachrichten aus Tharvos.<br>
+        Mit der Anmeldung stimmst du zu, gelegentlich Neuigkeiten zur Hafenrattensaga zu erhalten.
+        <a href="datenschutz.html">Datenschutzerklärung</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="assets/img/logo-siegel.png" alt="Hafenratten Saga" />
+    </div>
+    <div class="footer-social">
+      <a href="https://instagram.com/hafenrattensaga" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://tiktok.com/@hafenrattensaga" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://youtube.com/@hafenrattensaga" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <p class="footer-legal">
+      &copy; 2026 Hafenrattensaga &middot;
+      <a href="impressum.html">Impressum</a> &middot;
+      <a href="datenschutz.html">Datenschutz</a>
+    </p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lb-close" onclick="closeLightbox()">&times;</span>
+    <img id="lb-img" src="" alt="Karte" />
+  </div>
+
+  <script>
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Newsletter (hook to existing Brevo/backend)
+    function handleSignup(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      // TODO: POST to newsletter endpoint
+      document.querySelector('.spaher-form').style.display = 'none';
+      document.getElementById('signup-success').style.display = 'block';
+    }
+  </script>
+
 </body>
 </html>
