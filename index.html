@@ -271,7 +271,7 @@
     }
 
     /* Antagonisten-Sektion */
-    #antagonisten { background: #0a0706; }
+    #antagonisten { background: #0c0807; }
 
     .antag-grid {
       display: grid;
@@ -280,48 +280,59 @@
     }
 
     .antag-card {
-      border: 1px solid rgba(122, 46, 26, 0.35);
-      background: rgba(122, 46, 26, 0.06);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2.5rem 1.5rem;
-      min-height: 260px;
-      gap: 1rem;
-      transition: border-color 0.25s;
+      border: 1px solid rgba(122, 46, 26, 0.5);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
     }
 
     .antag-card:hover {
-      border-color: rgba(122, 46, 26, 0.7);
+      transform: translateY(-4px);
+      border-color: var(--rust);
     }
 
-    .antag-sigil {
-      width: 56px;
-      height: 56px;
-      border: 1px solid rgba(122, 46, 26, 0.8);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: rgba(122, 46, 26, 0.9);
+    .antag-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      filter: saturate(0.7) brightness(0.85);
+      transition: filter 0.3s, transform 0.3s;
+      cursor: zoom-in;
+    }
+
+    .antag-card:hover img {
+      filter: saturate(0.9) brightness(1);
+      transform: scale(1.04);
+    }
+
+    .antag-info {
+      padding: 1rem 1.1rem 1.25rem;
+      background: #120b09;
+      border-top: 1px solid rgba(122, 46, 26, 0.4);
     }
 
     .antag-name {
       font-family: 'Cinzel', serif;
       font-size: 1rem;
       color: var(--gold);
-      text-align: center;
-      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.06em;
     }
 
     .antag-tag {
       font-family: 'Crimson Text', serif;
-      font-style: italic;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
+      color: var(--rust);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .antag-desc {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.92rem;
       color: var(--parchment2);
-      text-align: center;
+      line-height: 1.5;
     }
 
     .antag-hint {
@@ -617,12 +628,13 @@
 
     .spaher-form button:hover { background: var(--gold); color: var(--ink); }
 
-    .spaher-success {
-      display: none;
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
+    .spaher-coming-soon {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
       color: var(--gold);
-      font-size: 1.05rem;
+      opacity: 0.7;
+      margin-bottom: 1.5rem;
     }
 
     .spaher-legal {
@@ -842,27 +854,39 @@
       <div class="antag-grid">
 
         <div class="antag-card">
-          <div class="antag-sigil">&#9670;</div>
-          <div class="antag-name">Sorath Arrys</div>
-          <div class="antag-tag">Heerführer der Inquisition</div>
+          <img src="assets/img/sorath.jpg" alt="Sorath Arrys" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="antag-info">
+            <div class="antag-name">Sorath Arrys</div>
+            <div class="antag-tag">Heerführer der Inquisition</div>
+            <p class="antag-desc">Reitet in Tharvos ein wie ein Urteil. Die Flamme auf seiner Rüstung ist kein Symbol — sie brennt wirklich.</p>
+          </div>
         </div>
 
         <div class="antag-card">
-          <div class="antag-sigil">&#9670;</div>
-          <div class="antag-name">Gräfin van Zabor</div>
-          <div class="antag-tag">Herrin des Hafenviertels</div>
+          <img src="assets/img/zabor.jpg" alt="Gräfin van Zabor" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="antag-info">
+            <div class="antag-name">Gräfin van Zabor</div>
+            <div class="antag-tag">Herrin des Hafenviertels</div>
+            <p class="antag-desc">Lächelt, während sie vernichtet. Ihre Schulden werden nie vergessen — nur irgendwann beglichen.</p>
+          </div>
         </div>
 
         <div class="antag-card">
-          <div class="antag-sigil">&#9670;</div>
-          <div class="antag-name">Lysara Varanth</div>
-          <div class="antag-tag">Unbekannt</div>
+          <img src="assets/img/lysara.jpg" alt="Lysara Varanth" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="antag-info">
+            <div class="antag-name">Lysara Varanth</div>
+            <div class="antag-tag">Unbekannt</div>
+            <p class="antag-desc">Weiße Rüstung, schwarzes Pferd, kein Name auf einer Liste. Niemand weiß, wem sie dient — nur dass sie immer zuerst da ist.</p>
+          </div>
         </div>
 
         <div class="antag-card">
-          <div class="antag-sigil">&#9670;</div>
-          <div class="antag-name">Kale</div>
-          <div class="antag-tag">Unbekannt</div>
+          <img src="assets/img/kale.jpg" alt="Kale" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="antag-info">
+            <div class="antag-name">Kale</div>
+            <div class="antag-tag">Unbekannt</div>
+            <p class="antag-desc">Niemand kennt seinen echten Namen. Wer ihn kennt, redet nicht darüber.</p>
+          </div>
         </div>
 
       </div>
@@ -979,19 +1003,10 @@
         und wie es mit der Hafenratten Saga weitergeht.
       </p>
 
-      <form class="spaher-form" onsubmit="handleSignup(event)">
-        <input type="email" placeholder="E-Mail-Adresse" required aria-label="E-Mail-Adresse" />
-        <button type="submit">Späher werden</button>
-      </form>
-
-      <div class="spaher-success" id="signup-success">
-        &#10022; Du bist auf der Späher-Liste. Tharvos wartet auf dich.
-      </div>
+      <p class="spaher-coming-soon">&#9670; Kommt bald &#9670;</p>
 
       <p class="spaher-legal">
-        Kein Spam. Nur Nachrichten aus Tharvos.<br>
-        Mit der Anmeldung stimmst du zu, gelegentlich Neuigkeiten zur Hafenrattensaga zu erhalten.
-        <a href="datenschutz.html">Datenschutzerklärung</a>
+        Kein Spam. Nur Nachrichten aus Tharvos.
       </p>
     </div>
   </section>
