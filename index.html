@@ -241,31 +241,33 @@
       object-fit: cover;
       object-position: top;
       filter: saturate(0.85) brightness(0.9);
-      transition: filter 0.3s;
+      transition: filter 0.3s, transform 0.3s;
+      cursor: zoom-in;
     }
 
     .char-card:hover img {
       filter: saturate(1) brightness(1);
+      transform: scale(1.04);
     }
 
     .char-info {
       padding: 1rem 1.1rem 1.25rem;
-      background: linear-gradient(to bottom, rgba(13,10,8,0) 0%, rgba(13,10,8,0.95) 100%);
+      background: #100d0a;
+      border-top: 1px solid var(--divider);
     }
 
     .char-name {
       font-family: 'Cinzel', serif;
       font-size: 1rem;
       color: var(--gold);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
 
     .char-quote {
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--parchment2);
-      line-height: 1.5;
+      font-family: 'Crimson Text', serif;
+      font-size: 0.95rem;
+      color: var(--parchment);
+      line-height: 1.55;
     }
 
     /* Antagonisten-Sektion */
@@ -353,46 +355,43 @@
     }
 
     .location-card {
-      position: relative;
-      overflow: hidden;
       border: 1px solid var(--divider);
+      background: #100d0a;
     }
 
     .location-card img {
       width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      filter: brightness(0.7) saturate(0.8);
-      transition: filter 0.3s, transform 0.4s;
+      height: auto;
+      display: block;
+      filter: brightness(0.85) saturate(0.85);
+      transition: filter 0.3s, transform 0.3s;
+      cursor: zoom-in;
     }
 
     .location-card:hover img {
-      filter: brightness(0.85) saturate(1);
-      transform: scale(1.03);
+      filter: brightness(1) saturate(1);
+      transform: scale(1.02);
     }
 
-    .location-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 1.25rem 1rem 0.9rem;
-      background: linear-gradient(to top, rgba(13,10,8,0.95), transparent);
+    .location-info {
+      padding: 1rem 1.1rem 1.25rem;
+      border-top: 1px solid var(--divider);
     }
 
     .location-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       letter-spacing: 0.12em;
       color: var(--gold);
       display: block;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
     }
 
     .location-desc {
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
-      font-size: 0.82rem;
-      color: var(--parchment2);
-      line-height: 1.45;
+      font-family: 'Crimson Text', serif;
+      font-size: 0.98rem;
+      color: var(--parchment);
+      line-height: 1.55;
     }
 
     /* Karten */
@@ -760,7 +759,7 @@
       <div class="char-grid">
 
         <div class="char-card">
-          <img src="assets/img/tavi.jpg" alt="Tavi" loading="lazy" />
+          <img src="assets/img/tavi.jpg" alt="Tavi" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Tavi</div>
             <div class="char-quote">Versteht einen Herzschlag zu spät. Aber wenn er handelt, hat er schon entschieden.</div>
@@ -768,7 +767,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/yara.jpg" alt="Yara" loading="lazy" />
+          <img src="assets/img/yara.jpg" alt="Yara" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Yara</div>
             <div class="char-quote">Fragt nicht, ob sie Angst hat. Sie handelt trotzdem.</div>
@@ -776,7 +775,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/tsu.jpg" alt="Tsu" loading="lazy" />
+          <img src="assets/img/tsu.jpg" alt="Tsu" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Tsu</div>
             <div class="char-quote">Redet wenig. Beobachtet alles. Weiss mehr als sie zeigt.</div>
@@ -784,7 +783,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/grymm.jpg" alt="Grymm" loading="lazy" />
+          <img src="assets/img/grymm.jpg" alt="Grymm" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Grymm</div>
             <div class="char-quote">Drei Versuche. Wer beim zweiten noch zweifelt, schafft den dritten nicht.</div>
@@ -792,7 +791,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/kip-gobbo.jpg" alt="Kip" loading="lazy" />
+          <img src="assets/img/kip-gobbo.jpg" alt="Kip" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Kip</div>
             <div class="char-quote">Von den Rostklippen. Redet zu viel. Hört zu gut.</div>
@@ -800,7 +799,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/nimara.png" alt="Nimara" loading="lazy" />
+          <img src="assets/img/nimara.png" alt="Nimara" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Nimara</div>
             <div class="char-quote">Liest schneller als andere denken. Ihr Rollstuhl hält sie nicht auf. Ihr Wissen schon eher.</div>
@@ -808,7 +807,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/grooba.png" alt="Grooba" loading="lazy" />
+          <img src="assets/img/grooba.png" alt="Grooba" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Grooba</div>
             <div class="char-quote">Kocht für alle, die sonst nichts haben. Fragt nie, woher du kommst. Nur, ob du Hunger hast.</div>
@@ -816,7 +815,7 @@
         </div>
 
         <div class="char-card">
-          <img src="assets/img/brom.png" alt="Brom" loading="lazy" />
+          <img src="assets/img/brom.png" alt="Brom" loading="lazy" onclick="openLightbox(this.src)" />
           <div class="char-info">
             <div class="char-name">Brom</div>
             <div class="char-quote">Er ist der König der Diebe und der Chef der Hafenratten. Doch er hat sich auf ein gefährliches Spiel eingelassen, das er zu verlieren droht.</div>
@@ -880,34 +879,34 @@
       <div class="location-grid">
 
         <div class="location-card">
-          <img src="assets/img/hafen-docks.jpg" alt="Die Hafendocks von Tharvos" loading="lazy" />
-          <div class="location-label">
+          <img src="assets/img/hafen-docks.jpg" alt="Die Hafendocks von Tharvos" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="location-info">
             <span class="location-name">Der Hafen</span>
-            <span class="location-desc">Salz, Teer und unausgesprochene Abkommen. Hier legen Schiffe an, die offiziell nichts Verbotenes geladen haben.</span>
+            <p class="location-desc">Salz, Teer und unausgesprochene Abkommen. Hier legen Schiffe an, die offiziell nichts Verbotenes geladen haben.</p>
           </div>
         </div>
 
         <div class="location-card">
-          <img src="assets/img/gassen-laternen.jpg" alt="Die Gassen der Unterstadt" loading="lazy" />
-          <div class="location-label">
+          <img src="assets/img/gassen-laternen.jpg" alt="Die Gassen der Unterstadt" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="location-info">
             <span class="location-name">Die Gassen</span>
-            <span class="location-desc">Die Unterstadt gehört den Schnellen und den Stummen. Hier lernt man früh: Wer rennt, hat einen Grund.</span>
+            <p class="location-desc">Die Unterstadt gehört den Schnellen und den Stummen. Hier lernt man früh: Wer rennt, hat einen Grund.</p>
           </div>
         </div>
 
         <div class="location-card">
-          <img src="assets/img/palast.jpg" alt="Der goldene Palast von Tharvos" loading="lazy" />
-          <div class="location-label">
+          <img src="assets/img/palast.jpg" alt="Der goldene Palast von Tharvos" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="location-info">
             <span class="location-name">Der Palast</span>
-            <span class="location-desc">Goldene Kuppeln über der Klippe. Von unten sieht man den Glanz. Was man nicht sieht, zahlt man trotzdem.</span>
+            <p class="location-desc">Goldene Kuppeln über der Klippe. Von unten sieht man den Glanz. Was man nicht sieht, zahlt man trotzdem.</p>
           </div>
         </div>
 
         <div class="location-card">
-          <img src="assets/img/rostklippen.jpg" alt="Die Rostklippen" loading="lazy" />
-          <div class="location-label">
+          <img src="assets/img/rostklippen.jpg" alt="Die Rostklippen" loading="lazy" onclick="openLightbox(this.src)" />
+          <div class="location-info">
             <span class="location-name">Die Rostklippen</span>
-            <span class="location-desc">Eisengeruch, Rauch und das Geschrei der Händler. Hier lebt, wer sonst keinen Platz hat.</span>
+            <p class="location-desc">Eisengeruch, Rauch und das Geschrei der Händler. Hier lebt, wer sonst keinen Platz hat.</p>
           </div>
         </div>
 
